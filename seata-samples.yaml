@@ -1,0 +1,171 @@
+##################################################################################################
+# business service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: business-service
+  labels:
+    app: business-service
+    service: business-service
+spec:
+  ports:
+  - port: 8084
+    name: http
+  selector:
+    app: business-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: business-service-v1
+  labels:
+    app: business-service
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: business-service
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: business-service
+        version: v1
+    spec:
+      containers:
+      - name: business-service
+        image: registry.sloth.com/ipaas/business-service:1.0-dev
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8084
+---
+##################################################################################################
+# order service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+  labels:
+    app: order-service
+    service: order-service
+spec:
+  ports:
+  - port: 8082
+    name: http
+  selector:
+    app: order-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service-v1
+  labels:
+    app: order-service
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: order-service
+        version: v1
+    spec:
+      containers:
+      - name: order-service
+        image: registry.sloth.com/ipaas/order-service:1.0-dev
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8082
+---
+##################################################################################################
+# storage service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: storage-service
+  labels:
+    app: storage-service
+    service: storage-service
+spec:
+  ports:
+  - port: 8081
+    name: http
+  selector:
+    app: storage-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storage-service-v1
+  labels:
+    app: storage-service
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: storage-service
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: storage-service
+        version: v1
+    spec:
+      containers:
+      - name: storage-service
+        image: registry.sloth.com/ipaas/storage-service:1.0-dev
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8081
+---
+##################################################################################################
+# user service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+  labels:
+    app: user-service
+    service: user-service
+spec:
+  ports:
+  - port: 8083
+    name: http
+  selector:
+    app: user-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service-v1
+  labels:
+    app: user-service
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-service
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: user-service
+        version: v1
+    spec:
+      containers:
+      - name: user-service
+        image: registry.sloth.com/ipaas/user-service:1.0-dev
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8083
