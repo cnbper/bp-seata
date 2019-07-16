@@ -55,7 +55,7 @@ spec:
     spec:
       containers:
       - name: seata
-        image: registry.sloth.com/ipaas/seata:1.0-dev
+        image: registry.sloth.com/ipaas/seata:0.7.1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8091
